@@ -1,11 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://www.youtube.com/iframe_api"></script>
 </head>
+
 <body>
-  <img width="1000px" src="pexels-zhang-kaiyv-1083515.jpg" alt="">  
+        <div id="video1-placeholder"></div>
+        <div id="video2-placeholder"></div>
+        <div id="video3-placeholder"></div>
+    <!-- Add more placeholders as needed -->
+
+    <script>
+        // An array of YouTube video IDs
+        var videoIds = ['guS52XfJFMI', 'oxjf0LAa-Kw', '7NKxU5eKDB4'];
+
+        // This function will be called when the YouTube API is ready
+        function onYouTubeIframeAPIReady() {
+            for (var i = 0; i < videoIds.length; i++) {
+                createYouTubePlayer('video' + (i + 1) + '-placeholder', videoIds[i]);
+            }
+        }
+        function createYouTubePlayer(placeholderId, videoId) {
+            new YT.Player(placeholderId, {
+                videoId: videoId,
+                width: 320, // Set the width to your desired size in pixels
+                height: 180, // Set the height to your desired size in pixels
+                playerVars: {
+                    'autoplay': 1, // Autoplay the video
+                    'controls': 1, // Show player controls
+                    'showinfo': 0, // Hide video title and uploader information
+                    'rel': 0, // Disable related videos at the end
+                    'loop': 1, // Loop the video
+                },
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+        function onPlayerReady(event) {
+            event.target.playVideo();
+        }
+    </script>
+
+
+    <script>
+        // Function to refresh the page after 3 minutes (180,000 milliseconds)
+        function refreshPage() {
+            location.reload();
+        }
+        // Set a timer to call the refreshPage function after 3 minutes
+        setTimeout(refreshPage, 300000); // 180,000 milliseconds = 3 minutes
+    </script>
+
 </body>
+
 </html>
